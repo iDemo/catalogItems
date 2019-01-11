@@ -1,0 +1,32 @@
+{% extends "index.html" %}
+{% block content %}
+
+<div class="row">
+  <div class="col-sm-12">
+    <ul class="list-group">
+      <li class="list-group-item active">
+        <h5>{{item.name}}</h5>
+      </li>
+      <li class="list-group-item">
+        <h5>Description:</h5>
+        <div>{{item.description}}</div>
+      </li>
+
+      {% if 'username' in session and user.id == session['user_id'] %}
+      <li class="list-group-item">
+        <a href="{{url_for('updateCourseItem',course_id=item.course_id, item_id=item.id)}}" class="btn btn-warning" role="button">
+          <span>Update</span>
+        </a>
+        <a href="{{url_for('deleteCourseItem',course_id=item.course_id, item_id=item.id)}}" class="btn btn-danger" role="button">
+          <span>Delete</span>
+        </a>
+      </li>
+      {% endif %}
+
+    </ul>
+    <div>
+      <a href="{{url_for('showCourse', course_id = item.course.id )}}" class="btn btn-primary" role="button">Back</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

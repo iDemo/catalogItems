@@ -1,0 +1,41 @@
+{% extends "index.html" %}
+{% block content %}
+
+<div class="row">
+  <div class="col-sm-4">
+    <ul class="list-group">
+      <li class="list-group-item active">All Courses</li>
+      {% for course in courses %}
+      <li class="list-group-item">
+        <a href="{{url_for('showCourse', course_id = course.id )}}">
+          <span>{{course.name}}</span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+  <div class="col-sm-8">
+    <ul class="list-group">
+      <li class="list-group-item active">{{coursename.name}} Items</li>
+      {% for item in items %}
+      <li class="list-group-item">
+        <a href="{{url_for('showCourseItem', course_id=item.course_id,item_id = item.id )}}">
+          <span>{{item.name}}</span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+
+    {%if 'username' in session %}
+    <ul class="list-group">
+      <li class="list-group-item">
+        <a href="{{url_for('newCourseItem', course_id=coursename.id)}}">
+          <span>Add a new {{coursename.name}} item?</span>
+        </a>
+      </li>
+    </ul>
+    {% endif %}
+
+  </div>
+</div>
+{% endblock %}

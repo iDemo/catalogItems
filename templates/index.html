@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>Item Catalog Project</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+  <script src="//apis.google.com/js/platform.js?onload=start"> </script>
+</head>
+
+<body>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="{{url_for('listCourse')}}" style="background">Item Catalog Project</a>
+      </div>
+      <ul class="nav navbar-nav navbar-right">
+        {%if 'username' not in session %}
+        <li><a href="{{url_for('login')}}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+        {% else %}
+        <li><a href="{{url_for('disconnect')}}"><span class="glyphicon glyphicon-log-in"></span> Logout from {{session['username']}}</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+  <div class="container">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <span style="    line-height: 35px; font-size: 2em;">Food Menu Items</span>
+        <a style="float: right;" href="{{url_for('listCourse')}}" class="btn btn-primary" role="button">Home</a>
+      </div>
+
+      {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+      {% for category, message in messages %}
+      <div class="alert alert-{{category}}">
+        <strong> {{ message }} </strong>
+      </div>
+      {% endfor %}
+      {% endif %}
+      {% endwith %}
+
+      <div class="panel-body">
+        <br>
+        {% block content %}
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>
